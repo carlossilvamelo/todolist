@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "tasklist")
 public class TaskList {
@@ -22,7 +21,7 @@ public class TaskList {
 	private Long id;
 	@Column(name = "name")
 	private String name;
-	@OneToMany(mappedBy = "taskList", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "taskList", cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	List<Task> tasks;
 
 	public TaskList() {

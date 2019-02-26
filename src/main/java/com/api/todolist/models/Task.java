@@ -1,5 +1,7 @@
 package com.api.todolist.models;
 
+import java.time.LocalDate;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -30,7 +32,9 @@ public class Task {
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "priority")
 	private TaskPriority priority;
-	@ManyToOne
+	private LocalDate created;
+	private LocalDate due;
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "tasklist_fk")
 	@JsonIgnore
 	private TaskList taskList;
@@ -38,10 +42,16 @@ public class Task {
 	public Task() {
 	}
 
-	public Task(String title, TaskStatus status, TaskPriority priority) {
+	public Task(Long id, String title, TaskStatus status, TaskPriority priority, LocalDate created, LocalDate due,
+			TaskList taskList) {
+
+		this.id = id;
 		this.title = title;
 		this.status = status;
 		this.priority = priority;
+		this.created = created;
+		this.due = due;
+		this.taskList = taskList;
 	}
 
 	public Long getId() {
@@ -82,6 +92,22 @@ public class Task {
 
 	public void setTaskList(TaskList taskList) {
 		this.taskList = taskList;
+	}
+
+	public LocalDate getCreated() {
+		return created;
+	}
+
+	public void setCreated(LocalDate created) {
+		this.created = created;
+	}
+
+	public LocalDate getDue() {
+		return due;
+	}
+
+	public void setDue(LocalDate due) {
+		this.due = due;
 	}
 
 }

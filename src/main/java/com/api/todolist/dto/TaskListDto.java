@@ -55,9 +55,9 @@ public class TaskListDto implements Serializable {
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
 	}
-	
+
 	public TaskList fromDto(TaskListDto taskListDto) {
-		
+
 		return new TaskList(taskListDto.getId(), taskListDto.getName(), taskListDto.getTasks());
 	}
 
