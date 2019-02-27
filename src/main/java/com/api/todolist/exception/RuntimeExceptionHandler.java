@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class RuntimeExceptionHandler {
+
 	static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	static final Logger LOG = Logger.getLogger(RuntimeExceptionHandler.class);
 
 	@ExceptionHandler({ ResourceNotFoundException.class, Exception.class })
 	public ResponseEntity<StandardError> exceptionsHandler(Exception e, HttpServletRequest request) {
+
 		LOG.error(String.format("Request '%s' threw the exception %s", request.getRequestURI(), e.toString()));
 		HttpStatus status = HttpStatus.NOT_FOUND;
 		StandardError standardError = new StandardError(LocalDateTime.now().format(FORMATTER), status.value(),

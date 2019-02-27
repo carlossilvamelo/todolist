@@ -1,9 +1,7 @@
 package com.api.todolist.dto;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
-
 import com.api.todolist.models.Task;
 import com.api.todolist.models.TaskList;
 
@@ -16,11 +14,11 @@ public class TaskListDto implements Serializable {
 	private List<Task> tasks;
 
 	public TaskListDto() {
-		super();
+
 	}
 
 	public TaskListDto(Long id, String name, List<Task> tasks) {
-		super();
+
 		this.id = id;
 		this.name = name;
 		this.tasks = tasks;
@@ -57,7 +55,6 @@ public class TaskListDto implements Serializable {
 	}
 
 	public TaskList fromDto(TaskListDto taskListDto) {
-
 		return new TaskList(taskListDto.getId(), taskListDto.getName(), taskListDto.getTasks());
 	}
 

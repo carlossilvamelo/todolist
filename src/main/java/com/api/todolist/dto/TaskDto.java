@@ -2,7 +2,6 @@ package com.api.todolist.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
 import com.api.todolist.enums.TaskPriority;
 import com.api.todolist.enums.TaskStatus;
 import com.api.todolist.models.Task;

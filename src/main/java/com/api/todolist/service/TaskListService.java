@@ -92,6 +92,7 @@ public class TaskListService implements ITaskListService {
 				() -> new ResourceNotFoundException(String.format("There is no tasklist with id=%d", taskListId)));
 		Task task = taskDto.fromDto(taskDto);
 		LOG.info(String.format("Creating Task into a task List with id=%d", taskList.getId()));
+
 		if (taskList.getTasks() != null)
 			Collections.addAll(taskList.getTasks(), task);
 		else
@@ -103,9 +104,11 @@ public class TaskListService implements ITaskListService {
 	@Override
 	public Page<Task> getAlltasksFromTasklistById(String title, String orderBy, Long taskListId, Integer pageNumber,
 			Integer pageSize) {
+		LOG.info(String.format("Finding tasks from Task List with id=%d", taskListId));
+
 		List<String> orderParamList = Arrays.asList("PRIORITY");
 		Pageable pageRequest = PageRequest.of(pageNumber, pageSize);
-		LOG.info(String.format("Finding tasks from Task List with id=%d", taskListId));
+
 		List<Task> tasks = new ArrayList<Task>(
 				taskRepository.findTasksByTaskListWithNameFilter(title, taskListId, pageRequest).getContent());
 
@@ -120,6 +123,7 @@ public class TaskListService implements ITaskListService {
 	@Override
 	public Task getTaskInsideTaskListByIds(Long taskId, Long taskListId) {
 		LOG.info(String.format("Finding tasks with id=%d from Task List with id=%d", taskId, taskListId));
+
 		TaskList taskList = taskListRepository.findById(taskListId).orElseThrow(
 				() -> new ResourceNotFoundException(String.format("There is no task-list with id=%d", taskListId)));
 
@@ -130,6 +134,7 @@ public class TaskListService implements ITaskListService {
 	@Override
 	public Task deleteTaskInsideTaskListByIds(Long taskId, Long taskListId) {
 		LOG.info(String.format("Deleting tasks with id=%d from Task List with id=%d", taskId, taskListId));
+
 		TaskList taskList = taskListRepository.findById(taskListId).orElseThrow(
 				() -> new ResourceNotFoundException(String.format("There is no task-list with id=%d", taskListId)));
 		Task task = taskList.getTasks().stream().filter(t -> t.getId().equals(taskId)).findFirst()

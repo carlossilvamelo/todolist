@@ -64,7 +64,6 @@ public class TaskListResource {
 	@DeleteMapping("/{taskListId}/tasks/{taskId}")
 	public Task deleteTaskInsideTaskListByIds(@PathVariable(name = "taskListId") Long taskListId,
 			@PathVariable(name = "taskId") Long taskId) {
-
 		return iTaskListService.deleteTaskInsideTaskListByIds(taskId, taskListId);
 	}
 
